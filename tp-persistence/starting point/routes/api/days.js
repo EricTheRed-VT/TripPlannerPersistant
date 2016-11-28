@@ -6,8 +6,8 @@ var Day = require('../../models/day');
 
 router.get('/', function(req, res, next) {
 	Day.findAll()
-		.then(function(days) {
-			res.send(days);
+		.then(function(dayArr) {
+			res.send(dayArr);
 		})
 		.catch(next)
 
@@ -23,7 +23,9 @@ router.get('/:id', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
 	Day.create(req.body)
-		.then(res.send)
+		.then(function() {
+			res.send('added new day');
+		})
 		.catch(next)
 });
 
@@ -34,17 +36,23 @@ router.put('/:id/:attraction', function(req, res, next) {
 			switch (req.params.attraction) {
 				case 'Hotel':
 					currentDay.update(req.body)
-						.then(res.send)
+						.then(function() {
+							res.send('added a hotel');
+						})
 						.catch(next);
 					break;
 				case 'Activity':
 					currentDay.addActivity(req.body)
-						.then(res.send)
+						.then(function() {
+							res.send('added an activity');
+						})
 						.catch(next);
 					break;
 				case 'Restaurant':
 					currentDay.addRestaurant(req.body)
-						.then(res.send)
+						.then(function() {
+							res.send('added a restaurant');
+						})
 						.catch(next);
 					break;
 				default:
