@@ -23,10 +23,11 @@ router.get('/:id', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
 	Day.create(req.body)
-		.then(function() {
-			res.send('added new day');
+		.then(function(day) {
+			res.json(day);
+
 		})
-		.catch(next)
+		.catch(next);
 });
 
 router.put('/:id/:attraction', function(req, res, next) {

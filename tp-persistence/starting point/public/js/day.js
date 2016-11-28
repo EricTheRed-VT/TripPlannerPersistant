@@ -50,7 +50,7 @@ var dayModule = (function () {
 
   Day.prototype.buildButton = function () {
     this.$button = $('<button class="btn btn-circle day-btn"></button>')
-      .text(this.number);
+      .text(this.id);
     var self = this;
     this.$button.on('click', function (){
       this.blur(); // removes focus box from buttons

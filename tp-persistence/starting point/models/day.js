@@ -6,9 +6,26 @@ var Activity = require('./activity');
 var Hotel = require('./hotel');
 
 var Day = db.define('day', {
-  number: Sequelize.INTEGER
+  number: {type: Sequelize.INTEGER, allowNull: false}
   
-});
+},
+  { hooks:
+  		{beforeValidate: function (row){
+  			
+
+  		return this.count().then(function(size){
+  		
+  		row.number = size + 1;
+  	});
+
+  }
+
+
+  		
+		}
+
+	}
+);
 
 
 module.exports = Day;
