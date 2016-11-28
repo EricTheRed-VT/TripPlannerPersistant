@@ -14,7 +14,7 @@
  * hiding and showing the proper days; and `addToCurrent`/`removeFromCurrent`,
  * which take `attraction` objects and pass them to `currentDay`.
  */
-
+ 
 var tripModule = (function () {
 
   // application state
@@ -34,7 +34,9 @@ var tripModule = (function () {
 
   function switchTo (newCurrentDay) {
     if (currentDay) currentDay.hide();
+    
     currentDay = newCurrentDay;
+    console.log('currentDay', currentDay);
     currentDay.show();
   }
 
@@ -61,7 +63,10 @@ var tripModule = (function () {
       if (days.length === 1) {
       currentDay = newDay;
     }
+    
+
     switchTo(newDay);
+
   });
     
   }
@@ -93,7 +98,10 @@ var tripModule = (function () {
       $.get('/api/day').then(function(data){
 
         if(data){
-          days = data.map(dayModule.create);                  //add buttons
+          days = data.map(function(day){
+
+            dayModule.create(day);
+          });                  //add buttons
           switchTo(days[0]);                 //show the first day
 
 

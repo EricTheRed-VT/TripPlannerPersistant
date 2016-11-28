@@ -30,27 +30,29 @@ router.post('/', function(req, res, next) {
 		.catch(next);
 });
 
-router.put('/:id/:attraction', function(req, res, next) {
+router.post('/:id/:attraction', function(req, res, next) {
 
 	Day.findById(req.params.id)
 		.then(function(currentDay) {
 			switch (req.params.attraction) {
-				case 'Hotel':
-					currentDay.update(req.body)
+				case 'hotel':
+					currentDay.update({hotelId:req.body.id})
 						.then(function() {
 							res.send('added a hotel');
 						})
 						.catch(next);
 					break;
-				case 'Activity':
-					currentDay.addActivity(req.body)
+				case 'activity':
+					Activity.findById(req.body.id)
+					.then(function(activ) {currentDay.addActivity(activ)})
 						.then(function() {
 							res.send('added an activity');
 						})
 						.catch(next);
 					break;
-				case 'Restaurant':
-					currentDay.addRestaurant(req.body)
+				case 'restaurant':
+					Restaurant.findById(req.body.id)
+					.then(function(rest) {currentDay.addRestaurant(rest)})
 						.then(function() {
 							res.send('added a restaurant');
 						})
