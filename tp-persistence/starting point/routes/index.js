@@ -1,8 +1,9 @@
-var Promise = require('bluebird');
 var router = require('express').Router();
 var Hotel = require('../models/hotel');
 var Restaurant = require('../models/restaurant');
 var Activity = require('../models/activity');
+
+router.use('/api', require('./api/attractions').router)
 
 router.get('/', function(req, res, next) {
   Promise.all([
@@ -10,7 +11,7 @@ router.get('/', function(req, res, next) {
     Restaurant.findAll(),
     Activity.findAll()
   ])
-  .spread(function(dbHotels, dbRestaurants, dbActivities) {
+  .then(function([dbHotels, dbRestaurants, dbActivities]) {
     res.render('index', {
       templateHotels: dbHotels,
       templateRestaurants: dbRestaurants,
