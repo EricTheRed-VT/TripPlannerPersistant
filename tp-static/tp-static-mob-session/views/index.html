@@ -1,0 +1,32 @@
+
+
+{% block content %}
+  
+  
+  <ul class="list-unstyled">
+   	<ul>
+    <label>Hotels: </label>
+   	<select>
+      
+      {% for hotels in templateHotels %}
+      <option >{{hotels.name}}</option>
+      {% endfor %}
+    </select>
+    <label> Restaurants: </label>
+    <select>
+     
+      {% for restaurants in templateRestaurants %}
+      <option >{{restaurants.name}}</option>
+      {% endfor %}
+    </select>
+    <label> Activities: </label>
+    <select>
+      
+      {% for activities in templateActivities %}
+      <option >{{activities.name}}</option>
+      {% endfor %}
+    </select>
+  	
+	 </ul>
+  </ul>
+{% endblock %}
